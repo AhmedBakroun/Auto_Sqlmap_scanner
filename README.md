@@ -6,3 +6,8 @@
  打开sqlmapapi
  python3 sqlmapapi.py -s
  然后运行main.py即可
+
+# Notice
+ 请勿用于非法用途
+ 存了日志，将在最近几天继续优化
+ taskid.txt作为容灾备份使用（程序意外退出）

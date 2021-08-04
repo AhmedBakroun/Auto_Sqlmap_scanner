@@ -1,3 +1,8 @@
+# Tested on Windows 10 Python3.7.9
+# Author : Lyscf
+# 2021.8.4 V1.2
+
+
 import requests
 import json
 import time
@@ -108,17 +113,26 @@ def get_payload(taskID):
     print(jsons['data'])
     data = str(jsons['data'])
     result_file = open('sqlmapresult.txt', 'a+', encoding='utf-8')
-    result_file.write(data + '\n')
+    # for line in data:
+    #    if '{' in line:
+    #        result_file.write(line + '\n')
+    #    elif'}' in file:
+    #        result_file.write(line + '\n')
+    #    elif '[' in line:
+    #        result_file.write(line + '\n')
+    #    elif ']' in line:
+    #        result_file.write(line + '\n')
+    #   else:
+    #        result_file.write(line)
+    # 别看了换行不可能修了 这辈子都不可能修了
+    result_file.write(data)
     result_file.close()
-    # 报错 can only concatenate list (not "str") to list，正在想办法
+
     return jsons['data']
 
 
 # 查询单个TaskID的输出情况，返回输出的payload
 
-
-# time.sleep(300)
-# get_scan_result('713d1983630dc43c')
 
 file = open('target.txt', 'r', encoding='utf-8')
 for urls in file:
@@ -128,6 +142,7 @@ for urls in file:
     test_target(urls)
     time.sleep(6)
     # 延迟防止线程过多，当前并行数量：10
+    # 当前并行峰值:50
 
 time.sleep(15)
 # 等待所有注入结束，延迟自己调，15s一般够用了
