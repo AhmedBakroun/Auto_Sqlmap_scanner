@@ -23,7 +23,10 @@ def get_new_task_id():
     print('[+]Setting taskID: ' + jsons['taskid'])
     taskID = jsons['taskid']
     taskIDs.append(taskID)
-    # 存进TaskID里面
+    # 存进TaskIDs里面
+    taskID_file = open('taskids.txt', 'a+')
+    taskID_file.write(taskID + '\r')
+    taskID_file.close()
     return taskID
 
 
@@ -88,10 +91,10 @@ def get_scan_result(taskID):
     res = requests.get(url)
     payloaad = res.text
     if 'payload' in payloaad:
-        print('[+]inject successful!!!')
+        print('[√]inject successful!!!')
         return True
     else:
-        print('inject faild')
+        print('[×]inject faild')
         return False
 
 
@@ -103,6 +106,11 @@ def get_payload(taskID):
     print(res.json())
     jsons = res.json()
     print(jsons['data'])
+    data = str(jsons['data'])
+    result_file = open('sqlmapresult.txt', 'a+', encoding='utf-8')
+    result_file.write(data + '\n')
+    result_file.close()
+    # 报错 can only concatenate list (not "str") to list，正在想办法
     return jsons['data']
 
 
@@ -114,11 +122,12 @@ def get_payload(taskID):
 
 file = open('target.txt', 'r', encoding='utf-8')
 for urls in file:
+    urls = urls.strip('\n')
+    # 去除换行符
     print('[+]testing' + urls)
     test_target(urls)
     time.sleep(6)
     # 延迟防止线程过多，当前并行数量：10
-
 
 time.sleep(15)
 # 等待所有注入结束，延迟自己调，15s一般够用了
