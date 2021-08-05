@@ -125,7 +125,7 @@ def get_payload(taskID):
     #   else:
     #        result_file.write(line)
     # 别看了换行不可能修了 这辈子都不可能修了
-    result_file.write(data)
+    result_file.write(data+'\n')
     result_file.close()
 
     return jsons['data']
