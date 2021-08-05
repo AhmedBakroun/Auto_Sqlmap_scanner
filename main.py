@@ -1,6 +1,6 @@
 # Tested on Windows 10 Python3.7.9
 # Author : Lyscf
-# 2021.8.4 V1.2
+# 2021.8.4 V1.3
 
 
 import requests
